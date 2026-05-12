@@ -1,192 +1,62 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Pena de Muerte: Concepto y Realidad Global</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #1a2236; --bg2: #1e2a3a;
-      --card: #243044; --card2: #2a3650;
-      --accent: #4fa3d1; --accent2: #5bb8f0;
-      --text: #d8e4f0; --muted: #8fa5be;
-      --green-card: #1e3a2e; --border: rgba(79,163,209,0.25);
-      --red: #c0392b; --gold: #d4a84b;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(26,34,54,0.96); backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem; display: flex; align-items: center; gap: 1.5rem;
-      height: 54px; overflow-x: auto;
-    }
-    nav a { color: var(--muted); text-decoration: none; font-size: .82rem; font-weight: 600; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; transition: color .2s; }
-    nav a:hover { color: var(--accent2); }
-
-    section { padding: 80px 0; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,3.5vw,2.8rem); color: var(--accent); margin-bottom: .8rem; }
-    .section-lead { font-size: 1.05rem; color: var(--text); margin-bottom: 2.5rem; }
-
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
-
-    /* ESTILO PARA LAS NUEVAS IMÁGENES */
+    /* IMAGE STYLING */
     .section-image {
       width: 100%;
       height: auto;
       max-width: 500px;
       border-radius: 12px;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
       display: block;
       margin: 0 auto;
-      object-fit: cover;
       border: 1px solid var(--border);
-      transition: transform 0.3s ease;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .section-image:hover {
-      transform: translateY(-5px);
-    }
+    .section-image:hover { transform: scale(1.03); }
 
-    /* HERO */
-    #hero { min-height: 100vh; background: linear-gradient(135deg, #0d1520 0%, #1a2236 55%, #0f1e30 100%); display: flex; align-items: center; position: relative; overflow: hidden; padding: 0; }
-    #hero::before { content:''; position:absolute; inset:0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234fa3d1' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E"); }
-    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; max-width:1200px; margin:0 auto; padding:4rem 2.5rem; position:relative; z-index:1; }
-    @media(max-width:768px){ .hero-inner { grid-template-columns:1fr; } }
+    /* SECTIONS */
+    #hero { min-height: 100vh; background: linear-gradient(135deg, #0d1520 0%, #1a2236 55%, #0f1e30 100%); display: flex; align-items: center; position: relative; }
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; max-width:1200px; margin:0 auto; padding:4rem 2.5rem; z-index:1; }
+    @media(max-width:768px){ .hero-inner { grid-template-columns:1fr; text-align: center; } }
     .hero-text h1 { font-family:'Playfair Display',serif; font-size:clamp(2.4rem,5vw,3.8rem); color:var(--accent); line-height:1.15; margin-bottom:1.5rem; }
-    .hero-text p { font-size:1.1rem; color:var(--text); margin-bottom:2rem; }
-    .tags { display:flex; flex-wrap:wrap; gap:.6rem; }
-    .tag { border:1px solid var(--accent); color:var(--accent); padding:.35rem .9rem; font-size:.75rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; }
+    .tags { display:flex; flex-wrap:wrap; gap:.6rem; margin-top: 1rem; }
+    @media(max-width:768px){ .tags { justify-content: center; } }
+    .tag { border:1px solid var(--accent); color:var(--accent); padding:.35rem .9rem; font-size:.75rem; font-weight:600; text-transform:uppercase; }
 
-    /* QUÉ ES */
     #que-es { background:var(--bg2); }
-    .que-es-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:3rem; align-items:center; }
-    @media(max-width:768px){ .que-es-grid { grid-template-columns:1fr; } }
-    .cards-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+    .cards-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top: 2rem; }
     @media(max-width:768px){ .cards-3 { grid-template-columns:1fr; } }
-    .card { background:var(--card); border:1px solid var(--border); padding:1.8rem 1.4rem; }
-    .card-icon { font-size:1.6rem; margin-bottom:.8rem; display:block; text-align:center; }
-    .card h3 { font-size:1rem; color:var(--text); margin-bottom:.8rem; }
+    .card { background:var(--card); border:1px solid var(--border); padding:2rem 1.5rem; border-radius: 8px; }
+    .card h3 { font-size:1.1rem; color:var(--accent2); margin-bottom:1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
     .card ul { list-style:none; }
-    .card ul li { padding:.3rem 0 .3rem 1.2rem; position:relative; color:var(--text); font-size:.9rem; }
-    .card ul li::before { content:'•'; position:absolute; left:0; color:var(--accent); }
+    .card ul li { padding:.4rem 0 .4rem 1.2rem; position:relative; font-size:.95rem; }
+    .card ul li::before { content:'→'; position:absolute; left:0; color:var(--accent); }
 
-    /* ARGENTINA */
     #argentina { background:var(--bg); }
-    .arg-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
+    .arg-grid { display:grid; grid-template-columns: 1fr 1fr; gap:3rem; align-items:center; }
     @media(max-width:768px){ .arg-grid { grid-template-columns:1fr; } }
-    .arg-col-title { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--accent); margin-bottom:1rem; }
-    .arg-box { background:var(--card); border:1px solid var(--border); padding:1.8rem; }
-    .arg-box p { font-size:.97rem; color:var(--text); margin-bottom:1rem; }
-    .green-box { background:var(--green-card); border-left:3px solid #4caf7d; padding:1.2rem 1.5rem; margin-top:1rem; display:flex; gap:1rem; align-items:flex-start; }
-    .green-box .check { color:#4caf7d; font-size:1.2rem; flex-shrink:0; }
-    .green-box p { font-size:.93rem; color:var(--text); margin:0; }
+    .arg-box { background:var(--card); border:1px solid var(--border); padding:2.5rem; border-radius: 8px; }
+    .green-box { background:var(--green-card); border-left:4px solid #4caf7d; padding:1.5rem; margin-top:1.5rem; border-radius: 0 8px 8px 0; }
 
-    /* AMÉRICAS */
     #americas { background:var(--bg2); }
-    .americas-grid { display:grid; grid-template-columns:1fr 1.4fr; gap:2.5rem; align-items:start; }
+    .americas-grid { display:grid; grid-template-columns: 1fr 1fr; gap:3rem; align-items:start; }
     @media(max-width:768px){ .americas-grid { grid-template-columns:1fr; } }
-    .mini-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem; }
-    .mini-card { background:var(--card); border:1px solid var(--border); padding:1.2rem; }
-    .mini-card h4 { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--text); margin-bottom:.7rem; text-align:center; }
-    .mini-card ul { list-style:none; }
-    .mini-card ul li { font-size:.83rem; color:var(--muted); text-align:center; padding:.15rem 0; }
-    .cases-col h3 { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--accent); margin-bottom:1.2rem; }
-    .case-item { border-left:3px solid var(--accent); padding:1rem 1.2rem; background:var(--card); margin-bottom:1rem; }
-    .case-item h4 { font-size:1rem; color:var(--text); margin-bottom:.5rem; }
-    .case-item p { font-size:.9rem; color:var(--muted); }
+    .case-item { border-left:3px solid var(--accent); padding:1.2rem; background:var(--card); margin-bottom:1.2rem; border-radius: 0 8px 8px 0; }
 
-    /* IGLESIA */
     #iglesia { background:var(--bg); }
-    .iglesia-layout { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+    .iglesia-layout { display:grid; grid-template-columns: 1fr 1fr; gap:3rem; align-items:center; }
     @media(max-width:768px){ .iglesia-layout { grid-template-columns:1fr; } }
-    .iglesia-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
-    @media(max-width:600px){ .iglesia-grid { grid-template-columns:1fr; } }
-    .iglesia-card { background:var(--card); border:1px solid var(--border); padding:1.6rem; }
-    .iglesia-card h3 { font-family:'Playfair Display',serif; font-size:1rem; color:var(--accent); margin-bottom:.7rem; }
-    .iglesia-card p { font-size:.92rem; color:var(--text); }
-    .iglesia-full { grid-column:1/-1; background:var(--card2); border:1px solid var(--border); padding:1.6rem; }
-    .iglesia-full h3 { font-family:'Playfair Display',serif; font-size:1rem; color:var(--accent); margin-bottom:.7rem; }
-    .iglesia-full p { font-size:.92rem; color:var(--text); }
+    .iglesia-text-grid { display:grid; grid-template-columns: 1fr; gap:1.5rem; }
+    .iglesia-full { background: var(--card2); padding: 2rem; border-radius: 8px; border: 1px solid var(--accent); }
 
-    /* JP2 */
     #jp2 { background:var(--bg2); }
-    .jp2-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:3rem; align-items:center; }
+    .jp2-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:4rem; align-items:center; }
     @media(max-width:768px){ .jp2-grid { grid-template-columns:1fr; } }
-    .jp2-label { display:inline-block; background:var(--card); border:1px solid var(--border); padding:.3rem .9rem; font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
-    .jp2-text h2 { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3vw,2.4rem); color:var(--accent); margin-bottom:1rem; }
-    .jp2-text p { font-size:.97rem; color:var(--text); margin-bottom:1.5rem; }
-    blockquote { border-left:3px solid var(--accent); padding:1rem 1.5rem; background:var(--card); font-style:italic; font-size:.95rem; color:var(--text); }
+    blockquote { border-left:4px solid var(--gold); padding:1.5rem; background:rgba(212,168,75,0.05); font-style:italic; font-size:1.1rem; margin-top: 1.5rem; }
 
-    /* PELÍCULA */
     #pelicula { background:var(--bg); }
-    .pelicula-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
-    @media(max-width:768px){ .pelicula-grid { grid-template-columns:1fr; } }
-    .peli-col h3 { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--accent); margin-bottom:.8rem; }
-    .peli-col p { font-size:.93rem; color:var(--text); margin-bottom:1rem; }
-    .info-box { background:var(--card); border:1px solid var(--border); padding:1rem 1.2rem; margin-bottom:1rem; display:flex; gap:.8rem; align-items:flex-start; }
-    .info-box .info-icon { color:var(--accent); flex-shrink:0; }
-    .info-box p { font-size:.88rem; color:var(--text); margin:0; }
-    .mensaje-list { list-style:none; margin-top:.5rem; }
-    .mensaje-list li { display:flex; gap:.8rem; align-items:flex-start; font-size:.93rem; color:var(--text); padding:.6rem 0; border-bottom:1px solid var(--border); }
-    .mensaje-list li:last-child { border-bottom:none; }
-    .arrow { color:var(--accent); flex-shrink:0; }
+    .video-wrapper { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .video-wrapper iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
 
-    /* REFLEXIONES */
-    #reflexiones { background:var(--bg2); }
-    .reflexiones-lead { font-size:1.05rem; color:var(--text); text-align:center; max-width:820px; margin:0 auto 2.5rem; }
-    .ref-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:2.5rem; }
-    @media(max-width:768px){ .ref-3 { grid-template-columns:1fr; } }
-    .ref-card { background:var(--card); border:1px solid var(--border); padding:1.8rem; }
-    .ref-card .ref-icon { font-size:1.6rem; margin-bottom:.8rem; display:block; }
-    .ref-card h3 { font-size:1rem; color:var(--accent); margin-bottom:.7rem; }
-    .ref-card p { font-size:.92rem; color:var(--text); }
-    .final-quote { border-left:3px solid var(--accent); padding:1.2rem 1.8rem; background:var(--card); max-width:820px; margin:0 auto; font-style:italic; font-size:.97rem; color:var(--text); }
-
-    /* OPINIONES */
-    #opiniones { background:var(--bg); }
-    .opiniones-lead { font-size:1rem; color:var(--muted); max-width:700px; margin:0 auto 2.5rem; text-align:center; }
-    .opinion-form-wrap { max-width:700px; margin:0 auto 2.5rem; background:var(--card); border:1px solid var(--border); padding:2rem; }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
-    @media(max-width:600px){ .form-row { grid-template-columns:1fr; } }
-    .form-group { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.8rem; }
-    .form-group label { font-size:.8rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
-    .form-group input, .form-group textarea {
-      background:#1a2236; border:1px solid var(--border); color:var(--text);
-      padding:.65rem .9rem; font-size:.93rem; font-family:inherit; outline:none; transition:border-color .2s; resize:none;
-    }
-    .form-group input:focus, .form-group textarea:focus { border-color:var(--accent); }
-    .postura-btns { display:flex; gap:.6rem; flex-wrap:wrap; }
-    .postura-btn { padding:.4rem 1rem; border:1px solid var(--border); background:transparent; color:var(--muted); font-size:.83rem; font-weight:600; cursor:pointer; transition:all .2s; font-family:inherit; }
-    .postura-btn:hover { border-color:var(--accent); color:var(--accent); }
-    .postura-btn.active-favor { background:#1e3a2e; border-color:#4caf7d; color:#4caf7d; }
-    .postura-btn.active-contra { background:#3a1e1e; border-color:#c0392b; color:#c0392b; }
-    .postura-btn.active-neutral { background:#2a3650; border-color:var(--accent); color:var(--accent); }
-    .submit-btn { margin-top:1rem; width:100%; padding:.85rem; background:var(--accent); color:#0d1520; font-size:1rem; font-weight:700; border:none; cursor:pointer; font-family:inherit; letter-spacing:.04em; transition:background .2s, transform .15s; }
-    .submit-btn:hover { background:var(--accent2); transform:translateY(-2px); }
-    .opinions-list { max-width:700px; margin:0 auto; display:flex; flex-direction:column; gap:1.2rem; }
-    .opinion-card { background:var(--card); border:1px solid var(--border); padding:1.4rem 1.6rem; animation: slideIn .4s ease; }
-    @keyframes slideIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
-    .opinion-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:.7rem; flex-wrap:wrap; gap:.5rem; }
-    .opinion-author { font-weight:700; color:var(--accent); font-size:.97rem; }
-    .opinion-postura { font-size:.75rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; padding:.2rem .7rem; border:1px solid; }
-    .postura-favor { color:#4caf7d; border-color:#4caf7d; background:#1e3a2e; }
-    .postura-contra { color:#c0392b; border-color:#c0392b; background:#3a1e1e; }
-    .postura-neutral { color:var(--accent); border-color:var(--accent); background:#1e2a3a; }
-    .opinion-text { font-size:.93rem; color:var(--text); line-height:1.65; }
-    .opinion-date { font-size:.75rem; color:var(--muted); margin-top:.6rem; }
-    .no-opinions { text-align:center; color:var(--muted); font-style:italic; padding:2rem 0; }
-    .like-btn { background:none; border:1px solid var(--border); color:var(--muted); padding:.3rem .8rem; font-size:.82rem; cursor:pointer; font-family:inherit; transition:all .2s; margin-top:.8rem; }
-    .like-btn:hover { border-color:var(--accent); color:var(--accent); }
-    .like-btn.liked { border-color:var(--accent); color:var(--accent); background:#1a2e40; }
-    .opinion-count { text-align:center; font-size:.88rem; color:var(--muted); margin-bottom:1.5rem; max-width:700px; margin-left:auto; margin-right:auto; }
-
-    footer { background:#0d1520; border-top:1px solid var(--border); text-align:center; padding:1.5rem; font-size:.8rem; color:var(--muted); }
+    footer { background:#0d1520; text-align:center; padding:3rem; border-top:1px solid var(--border); color: var(--muted); }
   </style>
 </head>
 <body>
@@ -199,15 +69,14 @@
   <a href="#iglesia">Iglesia</a>
   <a href="#jp2">Juan Pablo II</a>
   <a href="#pelicula">Celda 7</a>
-  <a href="#reflexiones">Reflexiones</a>
-  <a href="#opiniones">Opiniones</a>
 </nav>
 
+<!-- 1. INICIO (IMAGEN DEL CORREDOR - ORIGINAL 1) -->
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-text fade-in">
       <h1>La Pena de Muerte: Concepto y Realidad Global</h1>
-      <p>Una de las sanciones más antiguas y controvertidas de la humanidad. Un debate que atraviesa la ética, el derecho, la religión y la conciencia colectiva.</p>
+      <p class="section-lead">Un análisis profundo sobre una de las sanciones más controvertidas de la historia humana, abordando perspectivas jurídicas, éticas y sociales.</p>
       <div class="tags">
         <span class="tag">Derecho Penal</span>
         <span class="tag">Derechos Humanos</span>
@@ -215,294 +84,126 @@
       </div>
     </div>
     <div class="fade-in">
-      <img src="https://i.ibb.co/twWVNgX3/Whats-App-Image-2026-05-11-at-10-26-08-PM-1.jpg" alt="Ilustración principal" class="section-image" />
+      <img src="https://i.ibb.co/twWVNgX3/Whats-App-Image-2026-05-11-at-10-26-08-PM-1.jpg" alt="Corredor carcelario" class="section-image" />
     </div>
   </div>
 </section>
 
+<!-- 2. CONCEPTO (VA SOLO - SIN IMAGEN) -->
 <section id="que-es">
   <div class="container">
-    <div class="que-es-grid">
-      <div>
-        <h2 class="section-title fade-in">¿Qué es la Pena de Muerte?</h2>
-        <p class="section-lead fade-in">La <strong>pena de muerte</strong> o <strong>pena capital</strong> es la sanción jurídica máxima: la ejecución de una persona como consecuencia de una condena judicial. Se aplica en respuesta a delitos considerados de extrema gravedad.</p>
-        <div class="cards-3 fade-in">
-          <div class="card"><span class="card-icon">⚡</span><h3>Por método</h3><ul><li>Inyección letal</li><li>Electrocución</li><li>Fusilamiento</li><li>Horca o decapitación</li></ul></div>
-          <div class="card"><span class="card-icon">⚖️</span><h3>Por delito</h3><ul><li>Homicidio agravado</li><li>Traición a la patria</li><li>Terrorismo</li><li>Narcotráfico</li></ul></div>
-          <div class="card"><span class="card-icon">🌐</span><h3>Por vigencia</h3><ul><li>Abolicionista total</li><li>Abolicionista en práctica</li><li>Retencionista activo</li><li>En conflicto armado</li></ul></div>
-        </div>
-      </div>
-      <div class="fade-in" style="display:flex;align-items:center;justify-content:center;">
-        <img src="https://i.ibb.co/c45QPT9/Whats-App-Image-2026-05-11-at-10-26-08-PM-2.jpg" alt="Concepto de Pena de Muerte" class="section-image" />
-      </div>
+    <h2 class="section-title fade-in" style="text-align:center;">¿Qué es la Pena de Muerte?</h2>
+    <p class="section-lead fade-in" style="text-align:center; max-width:800px; margin-left:auto; margin-right:auto;">La pena capital es la sanción jurídica más extrema: la privación de la vida del condenado por parte del Estado tras un proceso judicial. Este concepto genera debates intensos sobre la retribución, la disuasión y el derecho inalienable a la vida.</p>
+    <div class="cards-3 fade-in">
+      <div class="card"><h3>Métodos de Ejecución</h3><ul><li>Inyección letal</li><li>Fusilamiento</li><li>Electrocución</li><li>Horca</li></ul></div>
+      <div class="card"><h3>Tipos de Delitos</h3><ul><li>Crímenes de lesa humanidad</li><li>Traición a la patria</li><li>Homicidios agravados</li><li>Terrorismo</li></ul></div>
+      <div class="card"><h3>Estatus Jurídico</h3><ul><li>Abolicionista total</li><li>Abolicionista de facto</li><li>Retencionista</li><li>Vigente en guerra</li></ul></div>
     </div>
   </div>
 </section>
 
+<!-- 3. ARGENTINA (IMAGEN DE LA BANDERA - ORIGINAL 3) -->
 <section id="argentina">
   <div class="container">
-    <h2 class="section-title fade-in">La Pena Capital en Argentina</h2>
-    <div class="arg-grid fade-in">
-      <div class="arg-box">
-        <p class="arg-col-title">Marco Constitucional</p>
-        <p>La Constitución Nacional prohíbe expresamente la pena de muerte por causas políticas (Art. 18). Desde 1984, con el retorno de la democracia, Argentina la abolió para delitos comunes.</p>
-        <p>En 1990 ratificó el <strong>Protocolo de Abolición de la Pena de Muerte</strong> del Pacto de San José de Costa Rica.</p>
-      </div>
-      <div>
-        <div class="arg-box" style="margin-bottom:1.2rem;">
-          <p class="arg-col-title">Posición actual</p>
-          <p>Argentina es un Estado <strong>abolicionista total</strong>. No existe ningún delito —civil, militar ni excepcional— que contemple la pena capital en su ordenamiento jurídico vigente.</p>
-          <div class="green-box">
-            <span class="check">✔</span>
-            <p>El Art. 75 inc. 22 de la CN otorga jerarquía constitucional a los tratados de derechos humanos, reforzando la prohibición absoluta.</p>
-          </div>
+    <div class="arg-grid">
+      <div class="arg-box fade-in">
+        <h2 class="section-title">La Pena en Argentina</h2>
+        <p>Nuestro país es un referente en la abolición. La Constitución Nacional prohíbe la pena de muerte por causas políticas (Art. 18). Desde 1984, con la consolidación democrática, se eliminó para todos los delitos comunes.</p>
+        <div class="green-box">
+          <p><strong>Abolicionista Total:</strong> Argentina ratificó los protocolos internacionales de DD.HH. que otorgan jerarquía constitucional a la prohibición absoluta de la ejecución estatal.</p>
         </div>
-        <img src="https://i.ibb.co/8ncdy1TD/Whats-App-Image-2026-05-11-at-10-26-08-PM-3.jpg" alt="Argentina" class="section-image" />
+      </div>
+      <div class="fade-in">
+        <img src="https://i.ibb.co/8ncdy1TD/Whats-App-Image-2026-05-11-at-10-26-08-PM-3.jpg" alt="Símbolo de Argentina" class="section-image" />
       </div>
     </div>
   </div>
 </section>
 
+<!-- 4. LAS AMÉRICAS (IMAGEN DE LOS CONTINENTES - ORIGINAL 4) -->
 <section id="americas">
   <div class="container">
-    <h2 class="section-title fade-in">Perspectivas en América: Contrastes y Realidades</h2>
-    <div class="americas-grid fade-in">
-      <div>
-        <img src="https://i.ibb.co/d4mjPSK5/Whats-App-Image-2026-05-11-at-10-26-08-PM.jpg" alt="Mapa de América" class="section-image" />
-        
-        <div class="mini-grid">
-          <div class="mini-card">
-            <h4>Países Abolicionistas</h4>
-            <ul><li>Argentina</li><li>Brasil</li><li>México</li><li>Colombia</li><li>Chile</li><li>Uruguay</li></ul>
-          </div>
-          <div class="mini-card">
-            <h4>Con Pena de Muerte</h4>
-            <ul><li>EE.UU.</li><li>Cuba</li><li>Guatemala</li><li>T. y Tobago</li><li>Guyana</li><li>Barbados</li></ul>
-          </div>
-        </div>
+    <h2 class="section-title fade-in" style="text-align:center;">Contrastes en las Américas</h2>
+    <p class="section-lead fade-in" style="text-align:center;">El continente americano presenta una realidad dividida entre el compromiso abolicionista y la persistencia de la pena capital en potencias regionales.</p>
+    <div class="americas-grid">
+      <div class="fade-in">
+        <img src="https://i.ibb.co/d4mjPSK5/Whats-App-Image-2026-05-11-at-10-26-08-PM.jpg" alt="Mapa de las Américas" class="section-image" />
       </div>
-      <div class="cases-col">
-        <h3>Casos destacados</h3>
-        <div class="case-item"><h4>🇺🇸 Estados Unidos</h4><p>Aplica la pena de muerte en 27 estados. Principal método: inyección letal. Más de 2.500 personas en el corredor de la muerte.</p></div>
-        <div class="case-item"><h4>🇨🇺 Cuba</h4><p>Mantiene la pena capital en su legislación, aunque la última ejecución registrada data de 2003.</p></div>
-        <div class="case-item"><h4>🇧🇷 Brasil</h4><p>Abolicionista desde 1988, salvo en estado de guerra declarada, conforme su Constitución Federal.</p></div>
+      <div class="fade-in">
+        <div class="case-item"><h4>🇺🇸 Estados Unidos</h4><p>Única democracia industrializada que mantiene ejecuciones activas. 27 estados conservan la pena, aunque la tendencia es a la reducción.</p></div>
+        <div class="case-item"><h4>🇨🇺 Cuba</h4><p>Mantiene la pena en su Código Penal, aunque existe una moratoria de hecho desde hace dos décadas.</p></div>
+        <div class="case-item"><h4>🇧🇷 Brasil</h4><p>Abolicionista para crímenes civiles, pero mantiene la opción teórica en su Constitución para casos de guerra externa declarada.</p></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- 5. IGLESIA (IMAGEN DE LA IGLESIA - ORIGINAL 5) -->
 <section id="iglesia">
   <div class="container">
-    <h2 class="section-title fade-in">La Voz de la Iglesia: Defensa Absoluta de la Vida</h2>
+    <h2 class="section-title fade-in">La Doctrina de la Iglesia</h2>
     <div class="iglesia-layout fade-in">
-      <img src="https://i.ibb.co/5gpVj1DG/Whats-App-Image-2026-05-11-at-10-26-09-PM-1.jpg" alt="Perspectiva de la Iglesia" class="section-image" />
-      
-      <div>
-        <div class="iglesia-grid">
-          <div class="iglesia-card"><h3>Gaudium et Spes (1965)</h3><p>Declara que la vida humana es sagrada desde la concepción. Condena todo atentado contra la vida como crimen gravísimo.</p></div>
-          <div class="iglesia-card"><h3>Catecismo (CIC 2267)</h3><p>La Iglesia enseña hoy que la pena de muerte es <em>inadmisible</em>, ya que atenta contra la dignidad inviolable de la persona.</p></div>
-          <div class="iglesia-full"><h3>Francisco (2018)</h3><p>Reformó el Catecismo: la pena capital es inadmisible en toda circunstancia. La Iglesia trabaja activamente por su abolición mundial.</p></div>
+      <div class="iglesia-text-grid">
+        <div class="card">
+          <h3>Evolución Doctrinaria</h3>
+          <p>La Iglesia Católica ha evolucionado hacia una postura de rechazo total a la pena de muerte, fundamentada en la dignidad intrínseca de toda persona humana.</p>
         </div>
+        <div class="iglesia-full">
+          <p><strong>Reforma del Papa Francisco (2018):</strong> Declaró formalmente la pena capital como contraria al Evangelio en toda circunstancia, instando a las instituciones a trabajar por su abolición universal.</p>
+        </div>
+      </div>
+      <div class="fade-in">
+        <img src="https://i.ibb.co/5gpVj1DG/Whats-App-Image-2026-05-11-at-10-26-09-PM-1.jpg" alt="Perspectiva religiosa" class="section-image" />
       </div>
     </div>
   </div>
 </section>
 
+<!-- 6. JUAN PABLO II (DEJA A JP2 - ORIGINAL 6) -->
 <section id="jp2">
   <div class="container">
     <div class="jp2-grid fade-in">
-      <img src="https://i.ibb.co/whwXRhjX/Whats-App-Image-2026-05-11-at-10-26-09-PM.jpg" alt="Juan Pablo II" class="section-image" />
-      
+      <div class="fade-in">
+        <img src="https://i.ibb.co/whwXRhjX/Whats-App-Image-2026-05-11-at-10-26-09-PM.jpg" alt="San Juan Pablo II" class="section-image" />
+      </div>
       <div class="jp2-text">
-        <span class="jp2-label">Juan Pablo II</span>
-        <h2>El Evangelio de la Vida</h2>
-        <p>En su encíclica <strong><em>Evangelium Vitae</em> (1995)</strong>, Juan Pablo II proclamó que la vida humana es sagrada e inviolable en todo momento. Respecto a la pena de muerte, señaló que los casos en que su aplicación es legítima son <strong>"muy raros, por no decir prácticamente inexistentes"</strong>.</p>
+        <h2 class="section-title">El Evangelio de la Vida</h2>
+        <p>En su encíclica <strong><em>Evangelium Vitae</em> (1995)</strong>, Juan Pablo II transformó el debate ético moderno. Sostuvo que el Estado solo podría recurrir a la ejecución si fuera la única forma de defender a la sociedad.</p>
         <blockquote>
-          "La sociedad tiene medios para reprimir el crimen sin quitar definitivamente al culpable la posibilidad de rehabilitarse."
-          <br><small>— Juan Pablo II, EV §56</small>
+          "La dignidad de la vida humana nunca se pierde, ni siquiera cuando se ha cometido el más grave de los delitos."
         </blockquote>
       </div>
     </div>
   </div>
 </section>
 
+<!-- 7. PELÍCULA (ESTÁ BIEN - YOUTUBE) -->
 <section id="pelicula">
   <div class="container">
-    <h2 class="section-title fade-in">"Milagro en la Celda 7"</h2>
-    <div class="pelicula-grid fade-in">
-      <div style="display:flex;flex-direction:column;gap:1.2rem;">
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow: 0 12px 32px rgba(0,0,0,0.4);">
-          <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" src="https://www.youtube.com/embed/LPEMm8IzCng" title="Milagro en la Celda 7" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="arg-grid">
+      <div class="fade-in">
+        <h2 class="section-title">"Milagro en la Celda 7"</h2>
+        <p>Esta pieza cinematográfica expone la falibilidad de la justicia y la deshumanización que conlleva la pena de muerte. A través del amor incondicional entre un padre con discapacidad y su hija, la película interpela al espectador sobre el riesgo irreversible de un error judicial.</p>
+      </div>
+      <div class="fade-in">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/LPEMm8IzCng" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="peli-col">
-        <h3>La historia</h3>
-        <p>Película turca (2019) basada en hechos reales. Narra la historia de <strong>Memo</strong>, un hombre con discapacidad intelectual condenado a muerte por un crimen que no cometió, y el amor incondicional por su pequeña hija Ova.</p>
-        <div class="info-box">
-          <span class="info-icon">ℹ️</span>
-          <p>Adaptada en varios países, incluida una versión filipina y una coreana. Es un fenómeno cinematográfico global sobre injusticia y amor paternal.</p>
-        </div>
-        <h3 style="margin-top:.5rem;">Mensaje central</h3>
-        <ul class="mensaje-list">
-          <li><span class="arrow">→</span> Expone la <strong>falibilidad del sistema judicial</strong> y el riesgo de condenas irreversibles.</li>
-          <li><span class="arrow">→</span> Humaniza al condenado, cuestionando la <strong>deshumanización</strong> del proceso penal.</li>
-          <li><span class="arrow">→</span> Plantea que ningún Estado debería tener el <strong>poder irreversible</strong> sobre la vida humana.</li>
-        </ul>
-      </div>
     </div>
-  </div>
-</section>
-
-<section id="reflexiones">
-  <div class="container">
-    <h2 class="section-title fade-in" style="text-align:center;">Reflexiones Finales</h2>
-    <p class="reflexiones-lead fade-in">La pena de muerte nos interpela como sociedad: ¿puede el Estado arrogarse el derecho de quitar la vida? La historia, el derecho, la fe y el arte confluyen en una misma respuesta.</p>
-    <div class="ref-3 fade-in">
-      <div class="ref-card"><span class="ref-icon">⚖️</span><h3>Lo legal</h3><p>Argentina y gran parte de América ya abolieron la pena capital como símbolo de civilización jurídica.</p></div>
-      <div class="ref-card"><span class="ref-icon">✝️</span><h3>Lo ético-religioso</h3><p>La Iglesia Católica defiende la vida desde la concepción hasta la muerte natural, sin excepciones.</p></div>
-      <div class="ref-card"><span class="ref-icon">🎬</span><h3>Lo humano</h3><p>El cine y la cultura nos recuerdan que detrás de cada condena hay una persona con historia, dignidad y derechos.</p></div>
-    </div>
-    <div class="final-quote fade-in">
-      "La medida de la civilización de un pueblo se mide por la forma en que trata a los más vulnerables."
-      <br><small>— Paráfrasis atribuida a Dostoievski</small>
-    </div>
-  </div>
-</section>
-
-<section id="opiniones">
-  <div class="container">
-    <h2 class="section-title fade-in" style="text-align:center;">Tu Opinión Importa</h2>
-    <p class="opiniones-lead fade-in">Este es un debate que nos involucra a todos. ¿Qué pensás sobre la pena de muerte? Dejá tu reflexión y conocé lo que opinan los demás.</p>
-
-    <div class="opinion-form-wrap fade-in">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="op-nombre">Tu nombre (opcional)</label>
-          <input type="text" id="op-nombre" placeholder="Anónimo" maxlength="40"/>
-        </div>
-        <div class="form-group">
-          <label>Tu postura</label>
-          <div class="postura-btns">
-            <button class="postura-btn" data-postura="A favor" onclick="selectPostura(this,'active-favor')">A favor</button>
-            <button class="postura-btn" data-postura="En contra" onclick="selectPostura(this,'active-contra')">En contra</button>
-            <button class="postura-btn" data-postura="Neutral" onclick="selectPostura(this,'active-neutral')">Neutral</button>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="op-texto">Tu opinión</label>
-        <textarea id="op-texto" rows="4" placeholder="Compartí tu reflexión sobre la pena de muerte..." maxlength="600"></textarea>
-      </div>
-      <button class="submit-btn" onclick="publicarOpinion()">Publicar opinión</button>
-    </div>
-
-    <div class="opinion-count" id="opinion-count"></div>
-    <div class="opinions-list" id="opinions-list"></div>
   </div>
 </section>
 
 <footer>
-  <p>La Pena de Muerte: Concepto y Realidad Global &nbsp;·&nbsp; Derecho Penal · Derechos Humanos · Ética y Justicia</p>
+  <p>© 2026 - Análisis Académico sobre la Pena de Muerte | Ética, Derecho y Sociedad</p>
 </footer>
 
 <script>
-  // Scroll fade-in
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.10 });
+  }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // Opiniones
-  let posturaSeleccionada = '';
-
-  function selectPostura(btn, cls) {
-    document.querySelectorAll('.postura-btn').forEach(b => b.classList.remove('active-favor','active-contra','active-neutral'));
-    btn.classList.add(cls);
-    posturaSeleccionada = btn.dataset.postura;
-  }
-
-  function getOpiniones() {
-    try { return JSON.parse(localStorage.getItem('opiniones_pena_muerte') || '[]'); } catch(e) { return []; }
-  }
-  function saveOpiniones(arr) {
-    try { localStorage.setItem('opiniones_pena_muerte', JSON.stringify(arr)); } catch(e){}
-  }
-  function getLikes() {
-    try { return JSON.parse(localStorage.getItem('likes_pena_muerte') || '{}'); } catch(e) { return {}; }
-  }
-  function saveLikes(obj) {
-    try { localStorage.setItem('likes_pena_muerte', JSON.stringify(obj)); } catch(e){}
-  }
-  function posturaClass(p) {
-    if(p==='A favor') return 'postura-favor';
-    if(p==='En contra') return 'postura-contra';
-    return 'postura-neutral';
-  }
-  function esc(str) {
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  function renderOpiniones() {
-    const arr = getOpiniones();
-    const lks = getLikes();
-    const list = document.getElementById('opinions-list');
-    const countEl = document.getElementById('opinion-count');
-    countEl.textContent = arr.length > 0 ? `${arr.length} opinión${arr.length!==1?'es':''} compartida${arr.length!==1?'s':''}` : '';
-    if(arr.length === 0) {
-      list.innerHTML = '<p class="no-opinions">Aún no hay opiniones. ¡Sé el primero en compartir la tuya!</p>';
-      return;
-    }
-    list.innerHTML = arr.slice().reverse().map((op, i) => {
-      const realIdx = arr.length - 1 - i;
-      const liked = lks[realIdx];
-      return `
-        <div class="opinion-card">
-          <div class="opinion-header">
-            <span class="opinion-author">${esc(op.nombre || 'Anónimo')}</span>
-            ${op.postura ? `<span class="opinion-postura ${posturaClass(op.postura)}">${esc(op.postura)}</span>` : ''}
-          </div>
-          <p class="opinion-text">${esc(op.texto)}</p>
-          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-            <span class="opinion-date">${op.fecha}</span>
-            <button class="like-btn ${liked?'liked':''}" onclick="toggleLike(${realIdx})">
-              ${liked?'❤️':'🤍'} ${op.likes||0} útil
-            </button>
-          </div>
-        </div>`;
-    }).join('');
-  }
-
-  function publicarOpinion() {
-    const texto = document.getElementById('op-texto').value.trim();
-    if(!texto){ alert('Por favor escribí tu opinión antes de publicar.'); return; }
-    const nombre = document.getElementById('op-nombre').value.trim();
-    const arr = getOpiniones();
-    arr.push({
-      nombre: nombre || 'Anónimo',
-      postura: posturaSeleccionada,
-      texto: texto,
-      fecha: new Date().toLocaleDateString('es-AR', {day:'2-digit',month:'long',year:'numeric'}),
-      likes: 0
-    });
-    saveOpiniones(arr);
-    document.getElementById('op-texto').value = '';
-    document.getElementById('op-nombre').value = '';
-    posturaSeleccionada = '';
-    document.querySelectorAll('.postura-btn').forEach(b => b.classList.remove('active-favor','active-contra','active-neutral'));
-    renderOpiniones();
-    document.getElementById('opinions-list').scrollIntoView({behavior:'smooth', block:'start'});
-  }
-
-  function toggleLike(idx) {
-    const arr = getOpiniones();
-    const lks = getLikes();
-    if(lks[idx]) { arr[idx].likes = Math.max(0,(arr[idx].likes||0)-1); delete lks[idx]; }
-    else { arr[idx].likes = (arr[idx].likes||0)+1; lks[idx]=true; }
-    saveOpiniones(arr); saveLikes(lks);
-    renderOpiniones();
-  }
-
-  renderOpiniones();
 </script>
+
 </body>
 </html>
